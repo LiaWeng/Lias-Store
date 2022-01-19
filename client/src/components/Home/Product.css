@@ -1,0 +1,38 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  width: 350px;
+  height: 370px;
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+.product-description {
+  width: 100%;
+}
+
+.product-price {
+  margin: 5px 0;
+}
+
+.product-star {
+  color: #83e2b7;
+  height: 80%;
+}
+
+.product-image {
+  display: flex;
+  align-items: center;
+  height: 200px;
+  max-width: 300px;
+  margin: 20px 0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}

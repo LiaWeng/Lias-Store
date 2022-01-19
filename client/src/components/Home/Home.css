@@ -1,0 +1,10 @@
+.products {
+  padding: 40px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
+}

@@ -1,0 +1,9 @@
+.payment {
+  display: flex;
+  padding: 40px;
+  justify-content: space-around;
+}
+
+.card-info {
+  margin: 20px 0;
+}

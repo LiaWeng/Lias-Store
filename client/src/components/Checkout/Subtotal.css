@@ -1,0 +1,25 @@
+.subtotal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtotal h2 {
+  width: 100%;
+}
+
+p {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.gift {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.gift input {
+  margin-right: 5px;
+}

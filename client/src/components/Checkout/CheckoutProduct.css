@@ -1,0 +1,16 @@
+.checkout-product {
+  display: flex;
+  margin: 50px 0;
+}
+
+.checkout-product-image {
+  width: 200px;
+  max-height: 200px;
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-stars {
+  margin-bottom: 10px;
+}
