@@ -22,10 +22,9 @@ const removeHelper = (state, action) => {
 }
 
 export const getTotal = (basket) => {
-  const prices = basket.map((item) => Number(item.price))
   let total = 0
-  for (let price of prices) {
-    total += price
+  for (let item of basket) {
+    total += item.price
   }
 
   return total

@@ -35,7 +35,9 @@ const Header = ({ setLogin }) => {
         )}
 
         <div className='option'>Account</div>
-        <div className='option'>Orders</div>
+        <div className='option'>
+          <StyledLink to='/orders'>Orders</StyledLink>
+        </div>
         <div className='option'>
           <StyledLink to='/checkout'>
             <ShoppingBasketIcon className='basket-icon' />

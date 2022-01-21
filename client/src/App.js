@@ -11,6 +11,7 @@ import Header from './components/Header/Header'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login'
 import Checkout from './components/Checkout/Checkout'
+import Orders from './components/Orders/Orders'
 import Payment from './components/Payment/Payment'
 
 const promise = loadStripe(
@@ -22,7 +23,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   onAuthStateChanged(auth, (user) => {
-    console.log(user)
     if (user) {
       dispatch({
         type: 'SET_USER',
@@ -43,6 +43,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/orders' element={<Orders />} />
         <Route
           path='/payment'
           element={

@@ -6,11 +6,12 @@ import { WhiteBox, Button } from '../StyledComponents'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import CurrencyFormat from 'react-currency-format'
 import { getTotal } from '../../reducers/basketReducer'
+import { useNavigate } from 'react-router'
 
 const Payment = () => {
-  const [error, setError] = useState(null)
   const [disabled, setDisabled] = useState(true)
-  const [succeeded, setSucceeded] = useState(false)
+  const [error, setError] = useState(null)
+  // const [succeeded, setSucceeded] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [clientSecret, setClientSecret] = useState('')
 
@@ -18,36 +19,44 @@ const Payment = () => {
   const basket = useSelector(({ basket }) => basket)
   const stripe = useStripe()
   const elements = useElements()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const getClientSecret = async () => {
-      const response = await axios({
-        method: 'post',
-        url: '/payment/create',
-        body: basket,
-      })
-      setClientSecret(response.data.clientSecret)
-    }
+    if (basket.length !== 0) {
+      const getClientSecret = async () => {
+        const response = await axios.post('/payment/create', {
+          basket,
+        })
 
-    getClientSecret()
+        setClientSecret(response.data.clientSecret)
+      }
+
+      getClientSecret()
+    } else {
+      setDisabled(true)
+    }
   }, [basket]) //eslint-disable-line
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     setProcessing(true)
-    const payload = stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-        redirect_to_url: '/orders',
-      })
-      .then(() => {
-        setSucceeded(true)
-        setError(null)
-        setProcessing(false)
-      })
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    })
+
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`)
+      setProcessing(false)
+    } else {
+      setError(null)
+      setProcessing(false)
+    }
+
+    navigate('/orders')
   }
 
   const handleChange = (e) => {
@@ -84,8 +93,8 @@ const Payment = () => {
         <form className='payment-detail' onSubmit={handleSubmit}>
           <CardElement className='card-info' onChange={handleChange} />
 
-          <Button disabled={processing || disabled || succeeded}>
-            <span>{processing ? <p>Processing</p> : 'Buy now!'}</span>
+          <Button disabled={processing || disabled}>
+            <span>{processing ? 'Processing' : 'Buy now!'}</span>
           </Button>
         </form>
 

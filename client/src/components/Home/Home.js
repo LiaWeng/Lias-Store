@@ -9,19 +9,19 @@ const Home = () => {
         <div className='row'>
           <Product
             title='OPI Infinite Shine Base Coat and Top Coat'
-            price='27.99'
+            price={27.99}
             image='https://m.media-amazon.com/images/I/81PwUnunYhL._AC_UL480_FMwebp_QL65_.jpg'
             rating={5}
           />
           <Product
             title='Maybelline The Nudes Eyeshadow Palette'
-            price='14.96'
+            price={14.96}
             image='https://m.media-amazon.com/images/I/81MkouPvWiL._AC_UL480_FMwebp_QL65_.jpg'
             rating={5}
           />
           <Product
             title='Reusable Bubble Tea Cup with Lid and Straw'
-            price='10.00'
+            price={Number(10).toFixed(2)}
             image='https://m.media-amazon.com/images/I/71LUav82pDS._AC_UL480_FMwebp_QL65_.jpg'
             rating={4}
           />
@@ -29,13 +29,13 @@ const Home = () => {
         <div className='row'>
           <Product
             title='3-Piece Dinosaur Cookie Cutter'
-            price='6.99'
+            price={6.99}
             image='https://m.media-amazon.com/images/I/81gEEu8GUPL._AC_UL480_FMwebp_QL65_.jpg'
             rating={3}
           />
           <Product
             title='Full Body Electric Massage Chair with Airbag'
-            price='319.99'
+            price={319.99}
             image='https://m.media-amazon.com/images/I/51J0kvq-9OL._AC_UL480_FMwebp_QL65_.jpg'
             rating={5}
           />

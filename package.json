@@ -1,0 +1,22 @@
+{
+  "name": "lia-online-store",
+  "version": "1.0.0",
+  "description": "e-commerce website built by lia",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "stripe": "^8.199.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
