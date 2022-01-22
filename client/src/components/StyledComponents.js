@@ -2,19 +2,27 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 
+const lightMint = '#aaf0d1'
+const darkMint = '#83e2b7'
+const lightGrey = 'rgb(230, 230, 230)'
+const darkGrey = 'rgb(165, 165, 165)'
+
 export const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 `
 
 export const Button = styled.button`
-  background-color: #aaf0d1;
+  background-color: ${lightMint};
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 8px 20px;
   &:hover {
     cursor: pointer;
   }
+  &:active {
+    background-color: ${darkMint};
+  }b
 `
 
 export const Input = styled.input`
@@ -22,7 +30,7 @@ export const Input = styled.input`
   padding: 10px;
   font-size: 14px;
   width: 100%;
-  border: 1px solid rgb(165, 165, 165);
+  border: 1px solid ${darkGrey};
   border-radius: 5px;
 `
 
@@ -33,12 +41,12 @@ export const WhiteBox = styled.div`
   padding-bottom: 20px;
   padding-left: ${(props) => (props.padding ? props.padding : '20px')};
   padding-right: ${(props) => (props.padding ? props.padding : '20px')};
-  width: 100%;
+  box-shadow: 0 0 10px ${darkGrey};
 `
 
 export const Divider = styled.hr`
   border: none;
-  border-top: 1px solid rgb(230, 230, 230);
+  border-top: 1px solid ${lightGrey};
   margin: 40px 0;
 `
 
@@ -48,7 +56,7 @@ export const StarRating = ({ rating }) => {
   return (
     <div>
       {starArray.map((x) => (
-        <StarIcon key={x} style={{ color: '#83e2b7', height: '80%' }} />
+        <StarIcon key={x} style={{ color: darkMint, height: '80%' }} />
       ))}
     </div>
   )

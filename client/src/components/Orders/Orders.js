@@ -22,7 +22,6 @@ const Orders = () => {
         data: doc.data(),
       }))
 
-      console.log(orders)
       setOrders(orders)
     }
   }, [user])

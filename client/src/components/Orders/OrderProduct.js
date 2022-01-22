@@ -1,6 +1,6 @@
 import React from 'react'
 import './OrderProduct.css'
-import { Divider, StarRating } from '../StyledComponents'
+import { StarRating } from '../StyledComponents'
 
 const OrderProduct = ({ product }) => {
   return (

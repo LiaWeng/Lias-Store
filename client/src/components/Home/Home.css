@@ -1,10 +1,9 @@
 .products {
-  padding: 40px;
+  padding: 40px 30px;
 }
 
 .row {
   display: flex;
   justify-content: center;
-  position: relative;
   margin-bottom: 40px;
 }

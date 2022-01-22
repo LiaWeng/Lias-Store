@@ -1,45 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Home.css'
+import { db } from '../../firebaseConfig'
+import { collection, getDocs } from 'firebase/firestore'
 import Product from './Product'
 
 const Home = () => {
+  const [products, setProducts] = useState([])
+
+  useEffect(async () => {
+    const querySnapshot = await getDocs(collection(db, 'products'))
+    const products = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }))
+
+    setProducts(products)
+  }, [])
+
+  let productsByRow = []
+  for (let i = 0; i < products.length; i += 3) {
+    const row = [products[i], products[i + 1], products[i + 2]]
+    productsByRow.push(row.filter((product) => product))
+  }
+
   return (
     <div>
       <div className='products'>
-        <div className='row'>
-          <Product
-            title='OPI Infinite Shine Base Coat and Top Coat'
-            price={27.99}
-            image='https://m.media-amazon.com/images/I/81PwUnunYhL._AC_UL480_FMwebp_QL65_.jpg'
-            rating={5}
-          />
-          <Product
-            title='Maybelline The Nudes Eyeshadow Palette'
-            price={14.96}
-            image='https://m.media-amazon.com/images/I/81MkouPvWiL._AC_UL480_FMwebp_QL65_.jpg'
-            rating={5}
-          />
-          <Product
-            title='Reusable Bubble Tea Cup with Lid and Straw'
-            price={10.59}
-            image='https://m.media-amazon.com/images/I/71LUav82pDS._AC_UL480_FMwebp_QL65_.jpg'
-            rating={4}
-          />
-        </div>
-        <div className='row'>
-          <Product
-            title='3-Piece Dinosaur Cookie Cutter'
-            price={6.99}
-            image='https://m.media-amazon.com/images/I/81gEEu8GUPL._AC_UL480_FMwebp_QL65_.jpg'
-            rating={3}
-          />
-          <Product
-            title='Full Body Electric Massage Chair with Airbag'
-            price={319.99}
-            image='https://m.media-amazon.com/images/I/51J0kvq-9OL._AC_UL480_FMwebp_QL65_.jpg'
-            rating={5}
-          />
-        </div>
+        {productsByRow.map((row) => (
+          <div className='row' key={productsByRow.indexOf(row)}>
+            {row.map((product) => (
+              <Product
+                title={product.data.title}
+                price={product.data.price}
+                image={product.data.image}
+                rating={product.data.rating}
+                id={product.id}
+                key={product.id}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )

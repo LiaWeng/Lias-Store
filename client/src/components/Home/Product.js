@@ -1,13 +1,10 @@
 import React from 'react'
 import './Product.css'
 import { useDispatch } from 'react-redux'
-import { Button } from '../StyledComponents'
+import { WhiteBox, Button, StarRating } from '../StyledComponents'
 
-import StarIcon from '@mui/icons-material/Star'
-
-const Product = ({ title, price, image, rating }) => {
+const Product = ({ title, price, image, rating, id }) => {
   const dispatch = useDispatch()
-  const starArray = [...Array(rating).keys()]
 
   const addToBasket = () => {
     dispatch({
@@ -17,28 +14,27 @@ const Product = ({ title, price, image, rating }) => {
         image: image,
         price: price,
         rating: rating,
+        id: id,
       },
     })
   }
 
   return (
-    <div className='product'>
-      <div className='product-description'>
-        <strong>{title}</strong>
-        <div className='product-price'>${price}</div>
-        <div>
-          {starArray.map((x) => (
-            <StarIcon className='product-star' key={x} />
-          ))}
+    <WhiteBox style={{ width: '350px', height: '370px', margin: '0 15px' }}>
+      <div className='product'>
+        <div className='product-description'>
+          <strong>{title}</strong>
+          <div className='product-price'>${price}</div>
+          <StarRating rating={rating} />
         </div>
-      </div>
 
-      <div className='product-image'>
-        <img src={image} alt='product' />
-      </div>
+        <div className='product-image'>
+          <img src={image} alt='product' />
+        </div>
 
-      <Button onClick={addToBasket}>Add to Basket</Button>
-    </div>
+        <Button onClick={addToBasket}>Add to Basket</Button>
+      </div>
+    </WhiteBox>
   )
 }
 

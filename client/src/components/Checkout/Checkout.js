@@ -14,13 +14,13 @@ const Checkout = () => {
         <Subtotal />
       </WhiteBox>
 
-      <WhiteBox padding='50px'>
+      <WhiteBox padding='50px' style={{ width: '100%' }}>
         <h1>Your Shopping Basket</h1>
 
         <Divider style={{ marginTop: '20px' }} />
 
         {basket.map((product) => (
-          <CheckoutProduct product={product} key={product.title} />
+          <CheckoutProduct product={product} key={product.id} />
         ))}
       </WhiteBox>
     </div>
