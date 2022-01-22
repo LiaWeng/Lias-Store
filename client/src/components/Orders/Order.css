@@ -1,0 +1,14 @@
+.order-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.order-date {
+  margin-right: -500px;
+}
+
+.order-products {
+  display: flex;
+  /* justify-content: space-around; */
+}

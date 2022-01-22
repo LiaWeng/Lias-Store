@@ -3,18 +3,22 @@ import './Checkout.css'
 import { useSelector } from 'react-redux'
 import CheckoutProduct from './CheckoutProduct'
 import Subtotal from './Subtotal'
-import { WhiteBox } from '../StyledComponents'
+import { WhiteBox, Divider } from '../StyledComponents'
 
 const Checkout = () => {
   const basket = useSelector(({ basket }) => basket)
 
   return (
     <div className='checkout'>
-      <WhiteBox style={{ width: '360px', height: '100%' }}>
+      <WhiteBox style={{ width: '380px', height: '100%', marginRight: '40px' }}>
         <Subtotal />
       </WhiteBox>
-      <WhiteBox>
+
+      <WhiteBox padding='50px'>
         <h1>Your Shopping Basket</h1>
+
+        <Divider style={{ marginTop: '20px' }} />
+
         {basket.map((product) => (
           <CheckoutProduct product={product} key={product.title} />
         ))}

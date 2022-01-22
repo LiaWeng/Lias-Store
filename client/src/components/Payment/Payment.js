@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './Payment.css'
-import { useSelector } from 'react-redux'
 import axios from '../../services'
-import { WhiteBox, Button } from '../StyledComponents'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import { db } from '../../firebaseConfig'
+import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
 import { getTotal } from '../../reducers/basketReducer'
-import { useNavigate } from 'react-router'
+import { WhiteBox, Button } from '../StyledComponents'
 
 const Payment = () => {
   const [disabled, setDisabled] = useState(true)
@@ -17,6 +19,7 @@ const Payment = () => {
 
   const user = useSelector(({ user }) => user)
   const basket = useSelector(({ basket }) => basket)
+  const dispatch = useDispatch()
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate()
@@ -27,7 +30,6 @@ const Payment = () => {
         const response = await axios.post('/payment/create', {
           basket,
         })
-
         setClientSecret(response.data.clientSecret)
       }
 
@@ -42,20 +44,32 @@ const Payment = () => {
 
     setProcessing(true)
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-      },
-    })
+    const { paymentIntent, error } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      }
+    )
 
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`)
+    if (error) {
+      setError(`Payment failed ${error.message}`)
       setProcessing(false)
     } else {
       setError(null)
       setProcessing(false)
     }
 
+    await addDoc(collection(db, 'users', user.uid, 'orders'), {
+      basket: basket,
+      amount: paymentIntent.amount,
+      created: paymentIntent.created,
+    })
+
+    dispatch({
+      type: 'EMPTY_BASKET',
+    })
     navigate('/orders')
   }
 
@@ -66,7 +80,7 @@ const Payment = () => {
 
   return (
     <div className='payment'>
-      <WhiteBox>
+      <WhiteBox style={{ marginRight: '40px' }}>
         <h2 className='payment-title'>Delivery Address</h2>
         <p>{user?.email}</p>
         <p>50 Town Centre Court</p>

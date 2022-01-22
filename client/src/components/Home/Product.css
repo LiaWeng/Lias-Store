@@ -19,11 +19,6 @@
   margin: 5px 0;
 }
 
-.product-star {
-  color: #83e2b7;
-  height: 80%;
-}
-
 .product-image {
   display: flex;
   align-items: center;

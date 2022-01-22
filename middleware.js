@@ -6,7 +6,7 @@ const calculateTotal = (req, res, next) => {
     total += item.price * 1.13
   }
 
-  req.total = total.toFixed(2) * 100
+  req.total = Math.round(total * 100)
 
   next()
 }

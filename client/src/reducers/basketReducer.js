@@ -6,6 +6,8 @@ const basketReducer = (state = [], action) => {
       const newState = removeHelper(state, action)
       return [...newState]
     }
+    case 'EMPTY_BASKET':
+      return []
     default:
       return state
   }

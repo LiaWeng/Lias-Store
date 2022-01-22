@@ -21,7 +21,7 @@ const Home = () => {
           />
           <Product
             title='Reusable Bubble Tea Cup with Lid and Straw'
-            price={Number(10).toFixed(2)}
+            price={10.59}
             image='https://m.media-amazon.com/images/I/71LUav82pDS._AC_UL480_FMwebp_QL65_.jpg'
             rating={4}
           />

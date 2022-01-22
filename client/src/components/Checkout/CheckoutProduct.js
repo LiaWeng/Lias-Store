@@ -1,13 +1,10 @@
 import React from 'react'
 import './CheckoutProduct.css'
 import { useDispatch } from 'react-redux'
-import { Button } from '../StyledComponents'
-
-import StarIcon from '@mui/icons-material/Star'
+import { Button, StarRating } from '../StyledComponents'
 
 const CheckoutProduct = ({ product }) => {
   const dispatch = useDispatch()
-  const starArray = [...Array(product.rating).keys()]
 
   const removeFromBasket = () => {
     dispatch({
@@ -25,11 +22,7 @@ const CheckoutProduct = ({ product }) => {
       <div>
         <strong>{product.title}</strong>
         <div className='product-price'>${product.price}</div>
-        <div className='checkout-stars'>
-          {starArray.map((x) => (
-            <StarIcon className='product-star' key={x} />
-          ))}
-        </div>
+        <StarRating rating={product.rating} />
         <Button onClick={removeFromBasket}>Remove From Basket</Button>
       </div>
     </div>
