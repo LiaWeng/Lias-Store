@@ -4,6 +4,10 @@
   justify-content: space-around;
 }
 
-.card-info {
+.payment-card-info {
   margin: 20px 0;
+}
+
+.payment-buy-button {
+  margin-top: 20px;
 }

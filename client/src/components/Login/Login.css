@@ -29,6 +29,10 @@
   margin: 10px 20px 20px 0;
 }
 
+.login-buttons {
+  margin-top: 20px;
+}
+
 .login-google {
   display: flex;
 }

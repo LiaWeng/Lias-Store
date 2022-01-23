@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
 import './Login.css'
-import { Button, Input } from '../StyledComponents'
 import { auth } from '../../firebaseConfig'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-
+import { Button, Input, StyledAlert } from '../StyledComponents'
 import CloseIcon from '@mui/icons-material/Close'
 
 const Login = ({ setLogin }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
   const navigate = useNavigate()
+
+  const formatError = (message) => {
+    const newMessage = message
+      .substring(message.indexOf('/') + 1, message.length - 2)
+      .replaceAll('-', ' ')
+    return newMessage.charAt(0).toUpperCase() + newMessage.slice(1) + '.'
+  }
 
   const signIn = (e) => {
     e.preventDefault()
@@ -22,7 +29,7 @@ const Login = ({ setLogin }) => {
       .then(() => {
         setLogin(false)
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => setError(formatError(error.message)))
   }
 
   const register = (e) => {
@@ -33,7 +40,7 @@ const Login = ({ setLogin }) => {
         navigate('/')
         setLogin(false)
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => setError(formatError(error.message)))
   }
 
   return (
@@ -60,10 +67,15 @@ const Login = ({ setLogin }) => {
               onChange={({ target }) => setPassword(target.value)}
             />
           </div>
-          <Button onClick={signIn}>Sign In</Button>
-          <Button style={{ marginLeft: '20px' }} onClick={register}>
-            Create Account
-          </Button>
+
+          {error && <StyledAlert severity='error'>{error}</StyledAlert>}
+
+          <div className='login-buttons'>
+            <Button onClick={signIn}>Sign In</Button>
+            <Button style={{ marginLeft: '20px' }} onClick={register}>
+              Create Account
+            </Button>
+          </div>
         </form>
       </div>
 

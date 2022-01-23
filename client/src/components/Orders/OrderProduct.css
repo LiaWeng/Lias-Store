@@ -1,6 +1,6 @@
 .order-product {
   display: flex;
-  margin-right: 55px;
+  margin-right: 65px;
 }
 
 .order-product:last-child {
@@ -23,7 +23,7 @@
 .order-product-info {
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 200px;
 }
 
 .order-product-price {

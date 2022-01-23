@@ -2,8 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const stripe = require('stripe')(process.env.SECRET_KEY)
-const { calculateTotal } = require('./middleware')
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 app.use(cors())
 app.use(express.json())
@@ -21,6 +20,10 @@ app.post('/payment/create', async (req, res) => {
   res.send({
     clientSecret: paymentIntent.client_secret,
   })
+})
+
+app.get('/payment/key', (req, res) => {
+  res.send(process.env.CRYPTO_KEY)
 })
 
 app.listen(process.env.PORT, () => {

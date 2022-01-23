@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import './Payment.css'
-import axios from '../../services'
+import { getStripeKey } from '../../services'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import { db } from '../../firebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
-import { getTotal } from '../../reducers/basketReducer'
-import { WhiteBox, Button } from '../StyledComponents'
+import { decryptTotal } from '../../crypto'
+import { WhiteBox, Button, StyledAlert } from '../StyledComponents'
 
 const Payment = () => {
+  const [total, setTotal] = useState(0)
+  const [stripeKey, setStripeKey] = useState('')
   const [disabled, setDisabled] = useState(true)
   const [error, setError] = useState(null)
-  // const [succeeded, setSucceeded] = useState(false)
   const [processing, setProcessing] = useState(false)
-  const [clientSecret, setClientSecret] = useState('')
 
   const user = useSelector(({ user }) => user)
   const basket = useSelector(({ basket }) => basket)
@@ -23,22 +23,26 @@ const Payment = () => {
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate()
-  const { total } = useParams()
+  const { encryptedTotal } = useParams()
 
   useEffect(() => {
     if (basket.length !== 0) {
-      const getClientSecret = async () => {
-        const response = await axios.post('/payment/create', {
-          total: total * 100,
-        })
-        setClientSecret(response.data.clientSecret)
-      }
-
-      getClientSecret()
+      decryptTotal(encryptedTotal).then((total) => setTotal(total))
     } else {
       setDisabled(true)
     }
   }, [basket]) //eslint-disable-line
+
+  useEffect(() => {
+    if (total !== 0) {
+      getStripeKey(total).then((key) => setStripeKey(key))
+    }
+  }, [total])
+
+  const handleChange = (e) => {
+    setDisabled(e.empty || e.error)
+    setError(e.error ? e.error.message : null)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,7 +50,7 @@ const Payment = () => {
     setProcessing(true)
 
     const { paymentIntent, error } = await stripe.confirmCardPayment(
-      clientSecret,
+      stripeKey,
       {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -55,7 +59,7 @@ const Payment = () => {
     )
 
     if (error) {
-      setError(`Payment failed ${error.message}`)
+      setError(`Payment failed: ${error.message}`)
       setProcessing(false)
     } else {
       setError(null)
@@ -72,11 +76,6 @@ const Payment = () => {
       type: 'EMPTY_BASKET',
     })
     navigate('/orders')
-  }
-
-  const handleChange = (e) => {
-    setDisabled(e.empty)
-    setError(e.error ? e.error.message : null)
   }
 
   return (
@@ -106,14 +105,17 @@ const Payment = () => {
         </div>
 
         <form className='payment-detail' onSubmit={handleSubmit}>
-          <CardElement className='card-info' onChange={handleChange} />
+          <CardElement className='payment-card-info' onChange={handleChange} />
 
-          <Button disabled={processing || disabled}>
+          {error && <StyledAlert severity='error'>{error}</StyledAlert>}
+
+          <Button
+            disabled={processing || disabled}
+            className='payment-buy-button'
+          >
             <span>{processing ? 'Processing' : 'Buy now!'}</span>
           </Button>
         </form>
-
-        {error && <div>{error}</div>}
       </WhiteBox>
     </div>
   )

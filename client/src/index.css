@@ -21,7 +21,7 @@ code {
     monospace;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0;
   height: 20px;
 }
@@ -33,7 +33,7 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #83e2b7;
+  background: rgb(165, 165, 165);
   border-top: 5px solid white;
   border-bottom: 5px solid white;
-}
+} */

@@ -60,7 +60,7 @@ const App = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/orders' element={<Orders />} />
         <Route
-          path='/payment/:total'
+          path='/payment/:encryptedTotal'
           element={
             <Elements stripe={promise}>
               <Payment />

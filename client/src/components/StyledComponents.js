@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+import Alert from '@mui/material/Alert'
 
 const lightMint = '#aaf0d1'
 const mediumMint = '#83e2b7'
@@ -82,5 +83,11 @@ export const StyledAddCircleIcon = styled(AddCircleIcon)`
   }
   &:active {
     color: ${darkMint};
+  }
+`
+
+export const StyledAlert = styled(Alert)`
+  && {
+    padding: 0 15px;
   }
 `

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Orders.css'
 import { useSelector } from 'react-redux'
 import { db } from '../../firebaseConfig'
-import { collection, getDocs, orderBy } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import Order from './Order'
 import { WhiteBox, Divider } from '../StyledComponents'
 
@@ -12,10 +12,12 @@ const Orders = () => {
 
   useEffect(async () => {
     if (user) {
-      const querySnapshot = await getDocs(
+      const q = query(
         collection(db, 'users', user.uid, 'orders'),
         orderBy('created', 'desc')
       )
+
+      const querySnapshot = await getDocs(q)
 
       const orders = querySnapshot.docs.map((doc) => ({
         id: doc.id,
