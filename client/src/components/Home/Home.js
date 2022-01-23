@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './Home.css'
-import { db } from '../../firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
 import Product from './Product'
 
 const Home = () => {
-  const [products, setProducts] = useState([])
-
-  useEffect(async () => {
-    const querySnapshot = await getDocs(collection(db, 'products'))
-    const products = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      data: doc.data(),
-    }))
-
-    setProducts(products)
-  }, [])
+  const products = useSelector(({ products }) => products)
 
   let productsByRow = []
   for (let i = 0; i < products.length; i += 3) {

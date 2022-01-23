@@ -4,11 +4,7 @@
   margin-bottom: 30px;
 }
 
-.order-date {
-  margin-right: -40%;
-}
-
 .order-products {
   display: flex;
-  /* justify-content: space-around; */
+  overflow: auto;
 }

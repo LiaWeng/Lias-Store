@@ -1,6 +1,10 @@
 .checkout-product {
   display: flex;
-  margin: 50px 0;
+  margin: 50px 0 80px 0;
+}
+
+.checkout-product:last-child {
+  margin-bottom: 40px;
 }
 
 .checkout-product-image {
@@ -11,6 +15,19 @@
   justify-content: center;
 }
 
+.checkout-product-info {
+  margin-right: auto;
+}
+
 .checkout-stars {
   margin-bottom: 20px;
+}
+
+.checkout-product-number {
+  height: 100%;
+  display: flex;
+}
+
+.checkout-product-number strong {
+  margin: 0 10px;
 }

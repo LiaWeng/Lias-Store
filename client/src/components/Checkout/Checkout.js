@@ -7,6 +7,8 @@ import { WhiteBox, Divider } from '../StyledComponents'
 
 const Checkout = () => {
   const basket = useSelector(({ basket }) => basket)
+  const products = useSelector(({ products }) => products)
+  const basketItems = Object.keys(basket)
 
   return (
     <div className='checkout'>
@@ -19,9 +21,18 @@ const Checkout = () => {
 
         <Divider style={{ marginTop: '20px' }} />
 
-        {basket.map((product) => (
-          <CheckoutProduct product={product} key={product.id} />
-        ))}
+        {basketItems.map((id) => {
+          const product = products.find((product) => product.id === id)
+          const number = basket[id]
+
+          return (
+            <CheckoutProduct
+              product={product}
+              number={number}
+              key={product.id}
+            />
+          )
+        })}
       </WhiteBox>
     </div>
   )

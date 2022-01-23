@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Payment.css'
 import axios from '../../services'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import { db } from '../../firebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
@@ -23,12 +23,13 @@ const Payment = () => {
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate()
+  const { total } = useParams()
 
   useEffect(() => {
     if (basket.length !== 0) {
       const getClientSecret = async () => {
         const response = await axios.post('/payment/create', {
-          basket,
+          total: total * 100,
         })
         setClientSecret(response.data.clientSecret)
       }
@@ -80,12 +81,12 @@ const Payment = () => {
 
   return (
     <div className='payment'>
-      <WhiteBox style={{ marginRight: '40px' }}>
+      <WhiteBox style={{ width: '100%', marginRight: '40px' }}>
         <h2 className='payment-title'>Delivery Address</h2>
         <p>{user?.email}</p>
         <p>50 Town Centre Court</p>
       </WhiteBox>
-      <WhiteBox>
+      <WhiteBox style={{ width: '100%' }}>
         <h2 className='payment-title'>Payment Method</h2>
 
         <div className='payment-price'>
@@ -93,11 +94,11 @@ const Payment = () => {
             renderText={(value) => (
               <div>
                 <strong>Total: {` ${value}`} </strong>
-                <span> ({basket.length} items + taxes)</span>
+                <span> (taxes included)</span>
               </div>
             )}
             decimalScale={2}
-            value={getTotal(basket) * 1.13}
+            value={total}
             displayType={'text'}
             thousandSeparator={true}
             prefix={'$'}

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth'
+import { db } from './firebaseConfig'
+import { collection, getDocs } from 'firebase/firestore'
 import { useDispatch } from 'react-redux'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -21,6 +23,19 @@ const promise = loadStripe(
 const App = () => {
   const [login, setLogin] = useState(false)
   const dispatch = useDispatch()
+
+  useEffect(async () => {
+    const querySnapshot = await getDocs(collection(db, 'products'))
+    const products = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }))
+
+    dispatch({
+      type: 'SET_PRODUCTS',
+      data: products,
+    })
+  }, [])
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -45,7 +60,7 @@ const App = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/orders' element={<Orders />} />
         <Route
-          path='/payment'
+          path='/payment/:total'
           element={
             <Elements stripe={promise}>
               <Payment />

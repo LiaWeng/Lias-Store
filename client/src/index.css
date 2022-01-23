@@ -23,4 +23,17 @@ code {
 
 ::-webkit-scrollbar {
   width: 0;
+  height: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(230, 230, 230);
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #83e2b7;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
 }

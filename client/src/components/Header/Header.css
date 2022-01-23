@@ -8,6 +8,7 @@
   color: black;
   padding: 0 20px;
   z-index: 100;
+  box-shadow: 0 0 10px rgb(165, 165, 165);
 }
 
 Link {
@@ -60,6 +61,8 @@ Link {
 .option {
   font-weight: 500;
   padding: 0 15px;
+  display: flex;
+  align-items: center;
 }
 
 .option:hover {
@@ -70,15 +73,25 @@ Link {
   padding-right: 5px;
 }
 
+.option-sign-out {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+}
+
+.option-sign-out:hover {
+  cursor: pointer;
+}
+
 .basket-icon {
   position: relative;
-  top: -1px;
+  top: 1px;
 }
 
 .basket-count {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   padding-left: 5px;
   position: relative;
-  top: -5px;
+  top: -3px;
 }

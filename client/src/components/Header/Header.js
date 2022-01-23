@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.css'
 import { useSelector } from 'react-redux'
 import { signOut } from 'firebase/auth'
@@ -9,8 +9,18 @@ import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket'
 
 const Header = ({ setLogin }) => {
+  const [basketNumber, setBasketNumber] = useState(0)
   const basket = useSelector(({ basket }) => basket)
   const user = useSelector(({ user }) => user)
+
+  useEffect(() => {
+    if (Object.values(basket).length !== 0) {
+      const sumItems = Object.values(basket).reduce((a, b) => a + b)
+      setBasketNumber(sumItems)
+    } else {
+      setBasketNumber(0)
+    }
+  }, [basket])
 
   return (
     <div className='header'>
@@ -25,8 +35,11 @@ const Header = ({ setLogin }) => {
 
       <div className='nav'>
         {user ? (
-          <div className='option' onClick={() => signOut(auth)}>
-            Sign out
+          <div>
+            <div className='option-sign-out' onClick={() => signOut(auth)}>
+              <strong>Sign out</strong>
+              <small>{user.email.substring(0, user.email.indexOf('@'))}</small>
+            </div>
           </div>
         ) : (
           <div className='option' onClick={() => setLogin(true)}>
@@ -41,7 +54,7 @@ const Header = ({ setLogin }) => {
         <div className='option'>
           <StyledLink to='/checkout'>
             <ShoppingBasketIcon className='basket-icon' />
-            <span className='basket-count'>{basket.length}</span>
+            <span className='basket-count'>{basketNumber}</span>
           </StyledLink>
         </div>
       </div>

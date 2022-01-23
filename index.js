@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/payment/create', calculateTotal, async (req, res) => {
+app.post('/payment/create', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: req.total,
+    amount: req.body.total,
     currency: 'usd',
   })
 

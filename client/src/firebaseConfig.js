@@ -2,16 +2,6 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyCYOFHGGxBBScze-n9GazD8AQHOvWMx4Ds',
-//   authDomain: 'clone-32f48.firebaseapp.com',
-//   projectId: 'clone-32f48',
-//   storageBucket: 'clone-32f48.appspot.com',
-//   messagingSenderId: '177652726735',
-//   appId: '1:177652726735:web:ca1093a634fa75cb5770ba',
-//   measurementId: 'G-ZT3VQDT8PN',
-// }
-
 const firebaseConfig = {
   apiKey: 'AIzaSyBrYNibF1CgK5OTrww7YR7ST7ztZiypEQU',
   authDomain: 'lia-online-store.firebaseapp.com',

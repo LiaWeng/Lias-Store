@@ -23,6 +23,8 @@ const Orders = () => {
       }))
 
       setOrders(orders)
+    } else {
+      setOrders([])
     }
   }, [user])
 
