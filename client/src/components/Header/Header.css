@@ -58,6 +58,13 @@ Link {
   top: 2px;
 }
 
+.option-email {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+
 .option {
   font-weight: 500;
   padding: 0 15px;
@@ -79,7 +86,7 @@ Link {
   padding: 0 15px;
 }
 
-.option-sign-out:hover {
+.option-sign-out strong:hover {
   cursor: pointer;
 }
 

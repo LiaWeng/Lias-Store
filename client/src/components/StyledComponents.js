@@ -89,5 +89,6 @@ export const StyledAddCircleIcon = styled(AddCircleIcon)`
 export const StyledAlert = styled(Alert)`
   && {
     padding: 0 15px;
+    border-radius: 5px;
   }
 `

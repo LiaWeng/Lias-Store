@@ -6,9 +6,10 @@ const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('./client/build'))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('')
 })
 
 app.post('/payment/create', async (req, res) => {
@@ -26,6 +27,8 @@ app.get('/payment/key', (req, res) => {
   res.send(process.env.CRYPTO_KEY)
 })
 
-app.listen(process.env.PORT, () => {
-  console.log(`Listening at http://localhost:${process.env.PORT}`)
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`)
 })

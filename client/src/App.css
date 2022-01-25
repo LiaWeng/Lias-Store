@@ -18,3 +18,7 @@ strong {
 p {
   margin: 0;
 }
+
+input:focus {
+  outline-color: rgb(165, 165, 165);
+}

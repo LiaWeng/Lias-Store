@@ -4,7 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { encryptTotal } from '../../crypto'
-import { Button } from '../StyledComponents'
+import { Button, StyledAlert } from '../StyledComponents'
 
 const calculateTotal = async (basket, products) => {
   let subtotal = 0
@@ -24,6 +24,7 @@ const calculateTotal = async (basket, products) => {
 const Subtotal = () => {
   const [totalData, setTotalData] = useState(null)
   const basket = useSelector(({ basket }) => basket)
+  const user = useSelector(({ user }) => user)
   const products = useSelector(({ products }) => products)
   const navigate = useNavigate()
 
@@ -57,18 +58,19 @@ const Subtotal = () => {
         prefix={'$'}
       />
 
-      <p>Free delivery</p>
+      <p className='subtotal-delivery'>Free delivery</p>
 
-      <div className='gift'>
-        <input type='checkbox' />
-        This order contains a gift.
-      </div>
+      {!user && (
+        <StyledAlert severity='error' style={{ marginBottom: '20px' }}>
+          Please sign in to proceed to checkout.
+        </StyledAlert>
+      )}
 
       <Button
         onClick={() => {
           navigate(`/payment/${totalData?.encryptedTotal}`)
         }}
-        disabled={Object.keys(basket).length === 0}
+        disabled={Object.keys(basket).length === 0 || !user}
       >
         Go to Checkout
       </Button>

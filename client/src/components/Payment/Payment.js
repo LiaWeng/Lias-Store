@@ -9,6 +9,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
 import { decryptTotal } from '../../crypto'
 import { WhiteBox, Button, StyledAlert } from '../StyledComponents'
+import Address from './Address'
 
 const Payment = () => {
   const [total, setTotal] = useState(0)
@@ -80,12 +81,9 @@ const Payment = () => {
 
   return (
     <div className='payment'>
-      <WhiteBox style={{ width: '100%', marginRight: '40px' }}>
-        <h2 className='payment-title'>Delivery Address</h2>
-        <p>{user?.email}</p>
-        <p>50 Town Centre Court</p>
-      </WhiteBox>
-      <WhiteBox style={{ width: '100%' }}>
+      <Address />
+
+      <WhiteBox style={{ width: '100%', height: '100%' }}>
         <h2 className='payment-title'>Payment Method</h2>
 
         <div className='payment-price'>
@@ -107,7 +105,11 @@ const Payment = () => {
         <form className='payment-detail' onSubmit={handleSubmit}>
           <CardElement className='payment-card-info' onChange={handleChange} />
 
-          {error && <StyledAlert severity='error'>{error}</StyledAlert>}
+          {error && (
+            <StyledAlert severity='error' style={{ marginBottom: '20px' }}>
+              {error}
+            </StyledAlert>
+          )}
 
           <Button
             disabled={processing || disabled}

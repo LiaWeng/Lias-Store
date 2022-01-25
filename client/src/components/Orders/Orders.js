@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { db } from '../../firebaseConfig'
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import Order from './Order'
-import { WhiteBox, Divider } from '../StyledComponents'
+import { WhiteBox, Divider, StyledAlert } from '../StyledComponents'
 
 const Orders = () => {
   const [orders, setOrders] = useState([])
@@ -36,6 +36,12 @@ const Orders = () => {
         <h1>Your Orders</h1>
 
         <Divider style={{ marginTop: '20px' }} />
+
+        {!user && (
+          <StyledAlert severity='error' style={{ margin: '-10px 0 10px 0' }}>
+            Please sign in to view your orders history.
+          </StyledAlert>
+        )}
 
         {orders?.map((order) => (
           <Order order={order} key={order.id} />

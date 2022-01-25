@@ -8,18 +8,11 @@
   width: 100%;
 }
 
-p {
+.subtotal p {
   width: 100%;
   margin-bottom: 5px;
 }
 
-.gift {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-  width: 100%;
-}
-
-.gift input {
-  margin-right: 5px;
+.subtotal p:last-of-type {
+  margin-bottom: 20px;
 }

@@ -15,7 +15,9 @@ const Order = ({ order }) => {
       <div className='order-title'>
         <div>
           <h2 className='order-date'>
-            {moment.unix(order.data.created).format('MMMM D, YYYY')}
+            {moment
+              .unix(order.data.created)
+              .format('MMMM D, YYYY\xa0\xa0\xa0\xa0\xa0\xa0h:mma')}
           </h2>
 
           <CurrencyFormat

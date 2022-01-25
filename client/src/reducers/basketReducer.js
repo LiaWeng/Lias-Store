@@ -27,23 +27,4 @@ const basketReducer = (state = {}, action) => {
   }
 }
 
-const removeHelper = (state, action) => {
-  const items = [...state]
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].id === action.data) {
-      items.splice(i, 1)
-      return items
-    }
-  }
-}
-
-export const getTotal = (basket) => {
-  // let total = 0
-  // for (let item of basket) {
-  //   total += item.price
-  // }
-
-  return 100
-}
-
 export default basketReducer

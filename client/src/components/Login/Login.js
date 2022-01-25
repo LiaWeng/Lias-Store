@@ -68,7 +68,11 @@ const Login = ({ setLogin }) => {
             />
           </div>
 
-          {error && <StyledAlert severity='error'>{error}</StyledAlert>}
+          {error && (
+            <StyledAlert severity='error' style={{ marginTop: '20px' }}>
+              {error}
+            </StyledAlert>
+          )}
 
           <div className='login-buttons'>
             <Button onClick={signIn}>Sign In</Button>
@@ -77,11 +81,6 @@ const Login = ({ setLogin }) => {
             </Button>
           </div>
         </form>
-      </div>
-
-      <div className='login-google'>
-        <h2>Or you can...</h2>
-        <Button style={{ marginLeft: '20px' }}>Sign In with Google</Button>
       </div>
     </div>
   )

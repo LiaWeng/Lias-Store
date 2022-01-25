@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebaseConfig'
 
@@ -12,6 +13,8 @@ const Header = ({ setLogin }) => {
   const [basketNumber, setBasketNumber] = useState(0)
   const basket = useSelector(({ basket }) => basket)
   const user = useSelector(({ user }) => user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (Object.values(basket).length !== 0) {
@@ -21,6 +24,14 @@ const Header = ({ setLogin }) => {
       setBasketNumber(0)
     }
   }, [basket])
+
+  const handleLogOut = () => {
+    signOut(auth)
+    dispatch({
+      type: 'EMPTY_BASKET',
+    })
+    navigate('/')
+  }
 
   return (
     <div className='header'>
@@ -34,12 +45,15 @@ const Header = ({ setLogin }) => {
       </div>
 
       <div className='nav'>
+        {user && (
+          <div className='option-email'>
+            {user.email.substring(0, user.email.indexOf('@'))}
+          </div>
+        )}
+
         {user ? (
-          <div>
-            <div className='option-sign-out' onClick={() => signOut(auth)}>
-              <strong>Sign out</strong>
-              <small>{user.email.substring(0, user.email.indexOf('@'))}</small>
-            </div>
+          <div className='option' onClick={handleLogOut}>
+            Sign out
           </div>
         ) : (
           <div className='option' onClick={() => setLogin(true)}>
@@ -47,7 +61,6 @@ const Header = ({ setLogin }) => {
           </div>
         )}
 
-        <div className='option'>Account</div>
         <div className='option'>
           <StyledLink to='/orders'>Orders</StyledLink>
         </div>
