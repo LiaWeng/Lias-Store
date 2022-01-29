@@ -19,8 +19,8 @@
 
 @media only screen and (max-width: 400px) {
   .product-container {
-    width: 296px;
-    height: 312px;
+    width: 259px;
+    height: 273px;
     margin: 0 15px 30px 15px;
     perspective: 1500px;
   }

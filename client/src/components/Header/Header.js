@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
-import { auth } from '../../firebaseConfig'
+import { useSelector } from 'react-redux'
 
+import Options from './Options'
 import { StyledLink, Input } from '../StyledComponents'
 import SearchIcon from '@mui/icons-material/Search'
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket'
 
-const Header = ({ setLogin }) => {
+const Header = () => {
+  const [showMenu, setShowMenu] = useState(false)
   const [basketNumber, setBasketNumber] = useState(0)
   const basket = useSelector(({ basket }) => basket)
   const user = useSelector(({ user }) => user)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (Object.values(basket).length !== 0) {
@@ -25,18 +21,10 @@ const Header = ({ setLogin }) => {
     }
   }, [basket])
 
-  const handleLogOut = () => {
-    signOut(auth)
-    dispatch({
-      type: 'EMPTY_BASKET',
-    })
-    navigate('/')
-  }
-
   return (
     <div className='header'>
       <StyledLink to='/'>
-        <div className='name'>LIA'S STORE</div>
+        <div className='header-name'>LIA'S STORE</div>
       </StyledLink>
 
       <div className='search'>
@@ -44,33 +32,28 @@ const Header = ({ setLogin }) => {
         <SearchIcon className='search-icon' />
       </div>
 
-      <div className='nav'>
-        {user && (
-          <div className='option-email'>
-            {user.email.substring(0, user.email.indexOf('@'))}
-          </div>
-        )}
-
-        {user ? (
-          <div className='option' onClick={handleLogOut}>
-            Sign out
-          </div>
-        ) : (
-          <div className='option' onClick={() => setLogin(true)}>
-            Sign In
-          </div>
-        )}
-
-        <div className='option'>
-          <StyledLink to='/orders'>Orders</StyledLink>
+      {user && (
+        <div className='nav-option-email'>
+          {user.email.substring(0, user.email.indexOf('@'))}
         </div>
-        <div className='option'>
-          <StyledLink to='/checkout'>
-            <ShoppingBasketIcon className='basket-icon' />
-            <span className='basket-count'>{basketNumber}</span>
-          </StyledLink>
-        </div>
-      </div>
+      )}
+
+      <p className='nav-menu' onClick={() => setShowMenu(!showMenu)}>
+        Menu
+      </p>
+
+      <nav className='horizontal-nav'>
+        <Options user={user} basketNumber={basketNumber} />
+      </nav>
+
+      <nav className='vertical-nav' style={{ display: showMenu ? '' : 'none' }}>
+        <Options
+          user={user}
+          basketNumber={basketNumber}
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+        />
+      </nav>
     </div>
   )
 }

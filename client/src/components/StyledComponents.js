@@ -56,6 +56,8 @@ export const WhiteBoxFlip = styled.div`
   padding-left: ${(props) => (props.padding ? props.padding : '20px')};
   padding-right: ${(props) => (props.padding ? props.padding : '20px')};
   box-shadow: 0 0 10px ${darkGrey};
+  -moz-box-shadow: 0 0 10px ${darkGrey};
+  -webkit-box-shadow: 0 0 10px ${darkGrey};
   transition: transform 0.8s;
   transform-style: preserve-3d;
   &:hover {

@@ -1,3 +1,74 @@
+@media only screen and (min-width: 961px) {
+  .header-name {
+    width: 100px;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .vertical-nav {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .header-name {
+    width: 100px;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+  }
+  .nav-menu {
+    font-weight: 500;
+  }
+  .horizontal-nav {
+    display: none;
+  }
+  .vertical-nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 3px 3px 3px rgb(165, 165, 165), -3px 3px 3px rgb(165, 165, 165);
+    -moz-box-shadow: 3px 3px 3px rgb(165, 165, 165),
+      -3px 3px 3px rgb(165, 165, 165);
+    -webkit-box-shadow: 3px 3px 3px rgb(165, 165, 165),
+      -3px 3px 3px rgb(165, 165, 165);
+    z-index: -100;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .header-name {
+    display: none;
+  }
+  .nav-menu {
+    font-weight: 500;
+  }
+  .horizontal-nav {
+    display: none;
+  }
+  .vertical-nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 3px 3px 3px rgb(165, 165, 165), -3px 3px 3px rgb(165, 165, 165);
+    -moz-box-shadow: 3px 3px 3px rgb(165, 165, 165),
+      -3px 3px 3px rgb(165, 165, 165);
+    -webkit-box-shadow: 3px 3px 3px rgb(165, 165, 165),
+      -3px 3px 3px rgb(165, 165, 165);
+  }
+}
+
 .header {
   height: 60px;
   display: flex;
@@ -13,13 +84,6 @@
 
 Link {
   text-decoration: none;
-  color: black;
-}
-
-.name {
-  width: 100px;
-  font-size: 18px;
-  font-weight: 500;
   color: black;
 }
 
@@ -51,14 +115,14 @@ Link {
   cursor: pointer;
 }
 
-.nav {
+/* .nav {
   display: flex;
   justify-content: space-between;
   position: relative;
   top: 2px;
-}
+} */
 
-.option-email {
+/* .option-email {
   padding: 0 15px;
   display: flex;
   align-items: center;
@@ -101,4 +165,4 @@ Link {
   padding-left: 5px;
   position: relative;
   top: -3px;
-}
+} */

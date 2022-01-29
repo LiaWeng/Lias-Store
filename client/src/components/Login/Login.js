@@ -5,15 +5,15 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { Input, StyledAlert, WhiteBox } from '../StyledComponents'
 import CloseIcon from '@mui/icons-material/Close'
 
-const Login = ({ setLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const formatError = (message) => {
     const newMessage = message
@@ -22,12 +22,18 @@ const Login = ({ setLogin }) => {
     return newMessage.charAt(0).toUpperCase() + newMessage.slice(1) + '.'
   }
 
+  const closeLogin = () => {
+    dispatch({
+      type: 'CLOSE_LOGIN',
+    })
+  }
+
   const signIn = (e) => {
     e.preventDefault()
 
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setLogin(false)
+        closeLogin()
       })
       .catch((error) => setError(formatError(error.message)))
   }
@@ -37,8 +43,7 @@ const Login = ({ setLogin }) => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        navigate('/')
-        setLogin(false)
+        closeLogin()
       })
       .catch((error) => setError(formatError(error.message)))
   }
@@ -52,7 +57,7 @@ const Login = ({ setLogin }) => {
               <h1>Please sign in or create an account</h1>
               <CloseIcon
                 className='login-close-icon'
-                onClick={() => setLogin(false)}
+                onClick={() => closeLogin()}
               />
             </div>
 

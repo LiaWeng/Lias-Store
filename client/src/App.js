@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth'
 import { db } from './firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -21,8 +21,8 @@ const promise = loadStripe(
 )
 
 const App = () => {
-  const [login, setLogin] = useState(false)
   const dispatch = useDispatch()
+  const openLogin = useSelector(({ login }) => login)
 
   useEffect(async () => {
     const querySnapshot = await getDocs(collection(db, 'products'))
@@ -53,8 +53,8 @@ const App = () => {
 
   return (
     <BrowserRouter className='app'>
-      <Header setLogin={setLogin} />
-      {login && <Login setLogin={setLogin} />}
+      <Header />
+      {openLogin && <Login />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/checkout' element={<Checkout />} />
