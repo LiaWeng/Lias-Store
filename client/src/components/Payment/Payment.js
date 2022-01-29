@@ -4,7 +4,7 @@ import { getStripeKey } from '../../services'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
-import { db } from '../../firebaseConfig'
+import { getFirestore } from 'firebase/firestore'
 import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
 import { decryptTotal } from '../../crypto'
@@ -18,6 +18,7 @@ const Payment = () => {
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState(false)
 
+  const db = getFirestore()
   const user = useSelector(({ user }) => user)
   const basket = useSelector(({ basket }) => basket)
   const dispatch = useDispatch()
@@ -83,7 +84,7 @@ const Payment = () => {
     <div className='payment'>
       <Address />
 
-      <WhiteBox style={{ width: '100%', height: '100%' }}>
+      <WhiteBox style={{ height: '100%' }} className='payment-container'>
         <h2 className='payment-title'>Payment Method</h2>
 
         <div className='payment-price'>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
-import { auth } from '../../firebaseConfig'
 import {
+  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
@@ -14,6 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const dispatch = useDispatch()
+  const auth = getAuth()
 
   const formatError = (message) => {
     const newMessage = message

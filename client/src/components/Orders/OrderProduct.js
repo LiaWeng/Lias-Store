@@ -1,6 +1,5 @@
 import React from 'react'
 import './OrderProduct.css'
-import { StarRating } from '../StyledComponents'
 
 const OrderProduct = ({ product, number }) => {
   return (
@@ -10,11 +9,10 @@ const OrderProduct = ({ product, number }) => {
       </div>
 
       <div className='order-product-info'>
-        <div>
+        <p>
           {product.data.title} &#215; {number}
-        </div>
-        <div className='order-product-price'>${product.data.price}</div>
-        <StarRating rating={product.data.rating} />
+        </p>
+        <p className='order-product-price'>${product.data.price}</p>
       </div>
     </div>
   )

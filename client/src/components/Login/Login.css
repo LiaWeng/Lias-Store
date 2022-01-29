@@ -1,7 +1,7 @@
 @media only screen and (min-width: 961px) {
   .login-animate-container {
     width: 500px;
-    animation: slide-down 0.5s;
+    animation: login-slide-down 0.5s;
   }
 }
 
@@ -9,6 +9,22 @@
   .login-animate-container {
     width: 400px;
     animation: login-slide-down 0.5s;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .login-animate-container {
+    width: 280px;
+    animation: login-slide-down 0.5s;
+  }
+}
+
+@keyframes login-slide-down {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0%);
   }
 }
 
@@ -24,15 +40,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@keyframes login-slide-down {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(0%);
-  }
 }
 
 .login-prompt {

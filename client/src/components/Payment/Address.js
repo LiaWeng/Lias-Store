@@ -11,7 +11,7 @@ const Address = () => {
   }
 
   return (
-    <WhiteBox style={{ width: '100%', height: '100%', marginRight: '40px' }}>
+    <WhiteBox className='address-container'>
       <h2 className='payment-title'>Delivery Address</h2>
 
       <PlacesAutocomplete

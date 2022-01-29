@@ -26,14 +26,14 @@ const CheckoutProduct = ({ product, number }) => {
 
   return (
     <div className='checkout-product'>
-      <div className='checkout-product-image'>
-        <img src={product.data.image} alt='product' />
-      </div>
-
       <div className='checkout-product-info'>
         <strong>{product.data.title}</strong>
         <div className='product-price'>${product.data.price}</div>
         <StarRating rating={product.data.rating} />
+      </div>
+
+      <div className='checkout-product-image'>
+        <img src={product.data.image} alt='product' />
       </div>
 
       <div className='checkout-product-number'>

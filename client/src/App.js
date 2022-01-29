@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { auth } from './firebaseConfig'
-import { onAuthStateChanged } from 'firebase/auth'
-import { db } from './firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { initializeApp } from 'firebase/app'
+import firebaseConfig from './.firebaseConfig'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
+
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -16,6 +19,8 @@ import Checkout from './components/Checkout/Checkout'
 import Orders from './components/Orders/Orders'
 import Payment from './components/Payment/Payment'
 
+initializeApp(firebaseConfig)
+
 const promise = loadStripe(
   'pk_test_51KIjoQCVSEHWYKdnzUdoSgXfTpA9NkKkrvAoUi6fIsvPcLw7e0XOXe8vWQv2IA5wJVc2Xqd5QkKtPXpEImcRhhwJ00BBXeA1HZ'
 )
@@ -23,6 +28,8 @@ const promise = loadStripe(
 const App = () => {
   const dispatch = useDispatch()
   const openLogin = useSelector(({ login }) => login)
+  const db = getFirestore()
+  const auth = getAuth()
 
   useEffect(async () => {
     const querySnapshot = await getDocs(collection(db, 'products'))

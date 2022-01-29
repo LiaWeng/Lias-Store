@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Options.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { signOut } from 'firebase/auth'
-import { auth } from '../../firebaseConfig'
+import { getAuth, signOut } from 'firebase/auth'
 import { StyledLink } from '../StyledComponents'
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket'
 
@@ -10,6 +9,7 @@ const Options = ({ user, showMenu, setShowMenu }) => {
   const [basketNumber, setBasketNumber] = useState(0)
   const dispatch = useDispatch()
   const basket = useSelector(({ basket }) => basket)
+  const auth = getAuth()
 
   useEffect(() => {
     if (Object.values(basket).length !== 0) {

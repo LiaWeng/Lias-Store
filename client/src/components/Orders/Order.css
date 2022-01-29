@@ -1,10 +1,24 @@
-.order-title {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
+@media only screen and (min-width: 701px) {
+  .order-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .order-products {
+    display: flex;
+    overflow: auto;
+  }
 }
 
-.order-products {
-  display: flex;
-  overflow: auto;
+@media only screen and (max-width: 700px) {
+  .order-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .order-id {
+    margin-top: 10px;
+  }
 }

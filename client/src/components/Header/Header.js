@@ -12,16 +12,10 @@ const Header = () => {
   const dispatch = useDispatch()
   const user = useSelector(({ user }) => user)
 
-  useEffect(() => {
+  const handleSearch = () => {
     dispatch({
       type: 'SET_KEYWORD',
       data: keyword,
-    })
-  }, [keyword])
-
-  const handleSearch = () => {
-    dispatch({
-      type: 'CLEAR_KEYWORD',
     })
   }
 

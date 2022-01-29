@@ -30,7 +30,7 @@ const Order = ({ order }) => {
           />
         </div>
 
-        <small>Order ID: {order.id}</small>
+        <small className='order-id'>Order ID: {order.id}</small>
       </div>
 
       <div className='order-products'>

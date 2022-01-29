@@ -19,6 +19,7 @@
   }
   .nav-menu {
     font-weight: 500;
+    cursor: pointer;
   }
   .horizontal-nav {
     display: none;
@@ -49,6 +50,7 @@
   }
   .nav-menu {
     font-weight: 500;
+    cursor: pointer;
   }
   .horizontal-nav {
     display: none;

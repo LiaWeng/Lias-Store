@@ -12,11 +12,9 @@ const Checkout = () => {
 
   return (
     <div className='checkout'>
-      <WhiteBox style={{ width: '380px', height: '100%', marginRight: '40px' }}>
-        <Subtotal />
-      </WhiteBox>
+      <Subtotal />
 
-      <WhiteBox padding='50px' style={{ width: '100%' }}>
+      <WhiteBox className='checkout-basket'>
         <h1>Your Shopping Basket</h1>
 
         <Divider style={{ marginTop: '20px' }} />

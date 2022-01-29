@@ -4,7 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { encryptTotal } from '../../crypto'
-import { StyledAlert } from '../StyledComponents'
+import { WhiteBox, StyledAlert } from '../StyledComponents'
 
 const calculateTotal = async (basket, products) => {
   let subtotal = 0
@@ -35,7 +35,7 @@ const Subtotal = () => {
   }, [basket, products])
 
   return (
-    <div className='subtotal'>
+    <WhiteBox className='subtotal'>
       <CurrencyFormat
         renderText={(value) => (
           <h2>
@@ -74,7 +74,7 @@ const Subtotal = () => {
       >
         Go to Checkout
       </button>
-    </div>
+    </WhiteBox>
   )
 }
 
