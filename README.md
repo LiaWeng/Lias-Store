@@ -6,10 +6,10 @@ The application is complete with the following functionalities:
 
 - User sign-up and log-in using Firebase authentication
 - Dynamic shopping basket for adding and deleting products using React-Redux
-- Credit card payment using Stripe and secured by crypto-js
+- Credit card payment using Stripe
 - Order history page using data retrieved from Firestore database
 - Autofill address using Google Places API
-- Responsive design suitable for laptop, tablet and mobile useing CSS
+- Responsive design suitable for laptop, tablet and mobile using CSS
 
 ## Visiting Lia's Store
 

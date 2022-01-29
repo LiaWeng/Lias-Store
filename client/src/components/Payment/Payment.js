@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react'
 import './Payment.css'
 import { getStripeKey } from '../../services'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import { getFirestore } from 'firebase/firestore'
 import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
-import { decryptTotal } from '../../crypto'
 import { WhiteBox, StyledAlert } from '../StyledComponents'
 import Address from './Address'
 
 const Payment = () => {
-  const [total, setTotal] = useState(0)
   const [stripeKey, setStripeKey] = useState('')
   const [disabled, setDisabled] = useState(true)
   const [error, setError] = useState(null)
@@ -21,19 +19,11 @@ const Payment = () => {
   const db = getFirestore()
   const user = useSelector(({ user }) => user)
   const basket = useSelector(({ basket }) => basket)
+  const total = useSelector(({ total }) => total)
   const dispatch = useDispatch()
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate()
-  const { encryptedTotal } = useParams()
-
-  useEffect(() => {
-    if (basket.length !== 0) {
-      decryptTotal(encryptedTotal).then((total) => setTotal(total))
-    } else {
-      setDisabled(true)
-    }
-  }, [basket]) //eslint-disable-line
 
   useEffect(() => {
     if (total !== 0) {
@@ -84,7 +74,7 @@ const Payment = () => {
     <div className='payment'>
       <Address />
 
-      <WhiteBox style={{ height: '100%' }} className='payment-container'>
+      <WhiteBox className='payment-container'>
         <h2 className='payment-title'>Payment Method</h2>
 
         <div className='payment-price'>
@@ -96,7 +86,7 @@ const Payment = () => {
               </div>
             )}
             decimalScale={2}
-            value={total}
+            value={total / 100}
             displayType={'text'}
             thousandSeparator={true}
             prefix={'$'}

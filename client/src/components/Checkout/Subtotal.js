@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './Subtotal.css'
 import CurrencyFormat from 'react-currency-format'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { encryptTotal } from '../../crypto'
 import { WhiteBox, StyledAlert } from '../StyledComponents'
 
 const calculateTotal = async (basket, products) => {
@@ -15,14 +14,14 @@ const calculateTotal = async (basket, products) => {
     itemNumber += basket[id]
   }
 
-  const total = Math.round(subtotal * 1.13 * 100) / 100
-  const encryptedTotal = await encryptTotal(total)
+  const total = Math.round(subtotal * 1.13 * 100)
 
-  return { encryptedTotal, subtotal, itemNumber }
+  return { total, subtotal, itemNumber }
 }
 
 const Subtotal = () => {
   const [totalData, setTotalData] = useState(null)
+  const dispatch = useDispatch()
   const basket = useSelector(({ basket }) => basket)
   const user = useSelector(({ user }) => user)
   const products = useSelector(({ products }) => products)
@@ -33,6 +32,14 @@ const Subtotal = () => {
       setTotalData(totalData)
     })
   }, [basket, products])
+
+  const handleClick = () => {
+    dispatch({
+      type: 'SET_TOTAL',
+      data: totalData.total,
+    })
+    navigate('/payment/pay')
+  }
 
   return (
     <WhiteBox className='subtotal'>
@@ -67,9 +74,7 @@ const Subtotal = () => {
       )}
 
       <button
-        onClick={() => {
-          navigate(`/payment/${totalData?.encryptedTotal}`)
-        }}
+        onClick={handleClick}
         disabled={Object.keys(basket).length === 0 || !user}
       >
         Go to Checkout
