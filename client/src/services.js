@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'https://online-store-lia-weng.herokuapp.com/', //'http://localhost:3001'
+  baseURL: '/api',
 })
 
 export const getCryptoKey = async () => {
-  const response = await instance.get('/payment/key')
+  const response = await instance.post('/payment/key')
   return response.data
 }
 

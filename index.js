@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send('')
 })
 
-app.post('/payment/create', async (req, res) => {
+app.post('api/payment/create', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.total,
     currency: 'usd',
@@ -23,11 +23,11 @@ app.post('/payment/create', async (req, res) => {
   })
 })
 
-app.get('/payment/key', (req, res) => {
+app.post('api/payment/key', (req, res) => {
   res.send(process.env.CRYPTO_KEY)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
   console.log(`Listening at ${PORT}`)
