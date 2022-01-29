@@ -16,28 +16,6 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
-// export const Button = styled.button`
-//   background-color: ${lightMint};
-//   border: none;
-//   border-radius: 5px;
-//   padding: 8px 20px;
-//   &:hover {
-//     cursor: pointer;
-//   }
-//   &:active {
-//     background-color: ${mediumMint};
-//   }
-// `
-
-// export const Input = styled.input`
-//   height: 12px;
-//   padding: 10px;
-//   font-size: 14px;
-//   width: 100%;
-//   border: 1px solid ${darkGrey};
-//   border-radius: 5px;
-// `
-
 export const WhiteBox = styled.div`
   background-color: white;
   border-radius: 10px;

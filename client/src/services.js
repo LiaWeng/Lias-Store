@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://online-store-lia-weng.herokuapp.com/', //'http://localhost:3001'
 })
 
 export const getCryptoKey = async () => {
