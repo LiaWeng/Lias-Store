@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Address.css'
 import PlacesAutocomplete from 'react-places-autocomplete'
-import { WhiteBox, Input } from '../StyledComponents'
+import { WhiteBox } from '../StyledComponents'
 
 const Address = () => {
   const [address, setAddress] = useState('')
@@ -23,7 +23,7 @@ const Address = () => {
           return (
             <div className='places-autocomplete'>
               <div className='input-address'>
-                <Input {...getInputProps({ placeholder: 'Type address' })} />
+                <input {...getInputProps({ placeholder: 'Type address' })} />
               </div>
 
               <div>

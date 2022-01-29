@@ -5,11 +5,24 @@ import Product from './Product'
 
 const Home = () => {
   const products = useSelector(({ products }) => products)
+  const keyword = useSelector(({ keyword }) => keyword)
+
+  const productsToShow = products.filter((product) =>
+    product.data.title.toLowerCase().includes(keyword)
+  )
 
   let productsByRow = []
-  for (let i = 0; i < products.length; i += 3) {
-    const row = [products[i], products[i + 1], products[i + 2]]
-    productsByRow.push(row.filter((product) => product))
+  if (productsToShow.length < 3) {
+    productsByRow[0] = productsToShow
+  } else {
+    for (let i = 0; i < productsToShow.length; i += 3) {
+      const row = [
+        productsToShow[i],
+        productsToShow[i + 1],
+        productsToShow[i + 2],
+      ]
+      productsByRow.push(row.filter((product) => product))
+    }
   }
 
   return (

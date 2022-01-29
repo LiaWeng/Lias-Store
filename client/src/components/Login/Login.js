@@ -5,8 +5,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
-import { useSelector, useDispatch } from 'react-redux'
-import { Input, StyledAlert, WhiteBox } from '../StyledComponents'
+import { useDispatch } from 'react-redux'
+import { StyledAlert, WhiteBox } from '../StyledComponents'
 import CloseIcon from '@mui/icons-material/Close'
 
 const Login = () => {
@@ -64,7 +64,7 @@ const Login = () => {
             <form>
               <div className='login-field'>
                 <p>Email</p>
-                <Input
+                <input
                   type='text'
                   value={email}
                   onChange={({ target }) => setEmail(target.value)}
@@ -72,7 +72,7 @@ const Login = () => {
               </div>
               <div className='login-field'>
                 <p>Password</p>
-                <Input
+                <input
                   type='password'
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}

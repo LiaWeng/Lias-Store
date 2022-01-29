@@ -8,7 +8,7 @@ import { db } from '../../firebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
 import { decryptTotal } from '../../crypto'
-import { WhiteBox, button, StyledAlert } from '../StyledComponents'
+import { WhiteBox, StyledAlert } from '../StyledComponents'
 import Address from './Address'
 
 const Payment = () => {

@@ -49,12 +49,15 @@ darkGrey = 'rgb(165, 165, 165)'
   p {
     font-size: 14px;
   }
+  span {
+    font-size: 14px;
+  }
   strong {
     font-weight: 500;
     font-size: 14px;
   }
   button {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -86,4 +89,13 @@ button:hover {
 
 button:active {
   background-color: #83e2b7;
+}
+
+input {
+  height: 12px;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid rgb(165, 165, 165);
+  border-radius: 5px;
 }

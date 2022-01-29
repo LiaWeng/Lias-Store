@@ -16,27 +16,27 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
-export const Button = styled.button`
-  background-color: ${lightMint};
-  border: none;
-  border-radius: 5px;
-  padding: 8px 20px;
-  &:hover {
-    cursor: pointer;
-  }
-  &:active {
-    background-color: ${mediumMint};
-  }
-`
+// export const Button = styled.button`
+//   background-color: ${lightMint};
+//   border: none;
+//   border-radius: 5px;
+//   padding: 8px 20px;
+//   &:hover {
+//     cursor: pointer;
+//   }
+//   &:active {
+//     background-color: ${mediumMint};
+//   }
+// `
 
-export const Input = styled.input`
-  height: 12px;
-  padding: 10px;
-  font-size: 14px;
-  width: 100%;
-  border: 1px solid ${darkGrey};
-  border-radius: 5px;
-`
+// export const Input = styled.input`
+//   height: 12px;
+//   padding: 10px;
+//   font-size: 14px;
+//   width: 100%;
+//   border: 1px solid ${darkGrey};
+//   border-radius: 5px;
+// `
 
 export const WhiteBox = styled.div`
   background-color: white;
@@ -46,23 +46,9 @@ export const WhiteBox = styled.div`
   padding-left: ${(props) => (props.padding ? props.padding : '20px')};
   padding-right: ${(props) => (props.padding ? props.padding : '20px')};
   box-shadow: 0 0 10px ${darkGrey};
-`
-
-export const WhiteBoxFlip = styled.div`
-  background-color: white;
-  border-radius: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: ${(props) => (props.padding ? props.padding : '20px')};
-  padding-right: ${(props) => (props.padding ? props.padding : '20px')};
   box-shadow: 0 0 10px ${darkGrey};
   -moz-box-shadow: 0 0 10px ${darkGrey};
   -webkit-box-shadow: 0 0 10px ${darkGrey};
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  &:hover {
-    transform: rotateY(180deg);
-  }
 `
 
 export const Divider = styled.hr`

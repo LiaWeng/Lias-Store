@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Options from './Options'
-import { StyledLink, Input } from '../StyledComponents'
+import { StyledLink } from '../StyledComponents'
 import SearchIcon from '@mui/icons-material/Search'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
-  const [basketNumber, setBasketNumber] = useState(0)
-  const basket = useSelector(({ basket }) => basket)
+  const [keyword, setKeyword] = useState('')
+  const dispatch = useDispatch()
   const user = useSelector(({ user }) => user)
 
   useEffect(() => {
-    if (Object.values(basket).length !== 0) {
-      const sumItems = Object.values(basket).reduce((a, b) => a + b)
-      setBasketNumber(sumItems)
-    } else {
-      setBasketNumber(0)
-    }
-  }, [basket])
+    dispatch({
+      type: 'SET_KEYWORD',
+      data: keyword,
+    })
+  }, [keyword])
+
+  const handleSearch = () => {
+    dispatch({
+      type: 'CLEAR_KEYWORD',
+    })
+  }
 
   return (
     <div className='header'>
@@ -28,8 +32,13 @@ const Header = () => {
       </StyledLink>
 
       <div className='search'>
-        <Input type='text' style={{ borderRadius: '5px 0 0 5px' }} />
-        <SearchIcon className='search-icon' />
+        <input
+          type='text'
+          className='search-input'
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+        <SearchIcon className='search-icon' onClick={handleSearch} />
       </div>
 
       {user && (
@@ -43,16 +52,11 @@ const Header = () => {
       </p>
 
       <nav className='horizontal-nav'>
-        <Options user={user} basketNumber={basketNumber} />
+        <Options user={user} />
       </nav>
 
       <nav className='vertical-nav' style={{ display: showMenu ? '' : 'none' }}>
-        <Options
-          user={user}
-          basketNumber={basketNumber}
-          showMenu={showMenu}
-          setShowMenu={setShowMenu}
-        />
+        <Options user={user} showMenu={showMenu} setShowMenu={setShowMenu} />
       </nav>
     </div>
   )

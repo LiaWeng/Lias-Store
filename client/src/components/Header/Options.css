@@ -11,7 +11,7 @@
   .nav-option:last-of-type {
     padding-right: 5px;
   }
-  .nav-backdrop {
+  .nav-home {
     display: none;
   }
 }
@@ -22,6 +22,9 @@
     padding: 10px 20px;
     display: flex;
     align-items: center;
+  }
+  .nav-home {
+    display: none;
   }
 }
 
@@ -35,24 +38,16 @@
   }
 }
 
-.nav-option-email {
-  padding: 0 15px;
-  display: flex;
-  align-items: center;
-  font-style: italic;
-}
-
 .nav-option:hover {
   cursor: pointer;
 }
 
 .basket-icon {
   position: relative;
-  top: 1px;
+  top: 2px;
 }
 
 .basket-count {
-  font-size: 18px;
   font-weight: 500;
   padding-left: 5px;
   position: relative;
