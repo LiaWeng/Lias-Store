@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import { Button, Input, StyledAlert } from '../StyledComponents'
+import { Input, StyledAlert, WhiteBox } from '../StyledComponents'
 import CloseIcon from '@mui/icons-material/Close'
 
 const Login = ({ setLogin }) => {
@@ -44,43 +44,51 @@ const Login = ({ setLogin }) => {
   }
 
   return (
-    <div className='login-page'>
-      <CloseIcon className='login-close-icon' onClick={() => setLogin(false)} />
+    <div className='login-backdrop'>
+      <div className='login-animate-container'>
+        <WhiteBox>
+          <div className='login'>
+            <div className='login-prompt'>
+              <h1>Please sign in or create an account</h1>
+              <CloseIcon
+                className='login-close-icon'
+                onClick={() => setLogin(false)}
+              />
+            </div>
 
-      <div className='login'>
-        <h1>Please sign in or create an account</h1>
+            <form>
+              <div className='login-field'>
+                <p>Email</p>
+                <Input
+                  type='text'
+                  value={email}
+                  onChange={({ target }) => setEmail(target.value)}
+                />
+              </div>
+              <div className='login-field'>
+                <p>Password</p>
+                <Input
+                  type='password'
+                  value={password}
+                  onChange={({ target }) => setPassword(target.value)}
+                />
+              </div>
 
-        <form>
-          <div className='login-field'>
-            <div>Email</div>
-            <Input
-              type='text'
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-            />
+              {error && (
+                <StyledAlert severity='error' style={{ marginTop: '20px' }}>
+                  {error}
+                </StyledAlert>
+              )}
+
+              <div className='login-buttons'>
+                <button onClick={signIn}>Sign In</button>
+                <button style={{ marginLeft: '20px' }} onClick={register}>
+                  Create Account
+                </button>
+              </div>
+            </form>
           </div>
-          <div className='login-field'>
-            <div>Password</div>
-            <Input
-              type='password'
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-
-          {error && (
-            <StyledAlert severity='error' style={{ marginTop: '20px' }}>
-              {error}
-            </StyledAlert>
-          )}
-
-          <div className='login-buttons'>
-            <Button onClick={signIn}>Sign In</Button>
-            <Button style={{ marginLeft: '20px' }} onClick={register}>
-              Create Account
-            </Button>
-          </div>
-        </form>
+        </WhiteBox>
       </div>
     </div>
   )

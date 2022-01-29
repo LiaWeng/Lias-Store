@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
@@ -46,6 +46,21 @@ export const WhiteBox = styled.div`
   padding-left: ${(props) => (props.padding ? props.padding : '20px')};
   padding-right: ${(props) => (props.padding ? props.padding : '20px')};
   box-shadow: 0 0 10px ${darkGrey};
+`
+
+export const WhiteBoxFlip = styled.div`
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: ${(props) => (props.padding ? props.padding : '20px')};
+  padding-right: ${(props) => (props.padding ? props.padding : '20px')};
+  box-shadow: 0 0 10px ${darkGrey};
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  &:hover {
+    transform: rotateY(180deg);
+  }
 `
 
 export const Divider = styled.hr`

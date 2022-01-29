@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Product.css'
 import { useDispatch } from 'react-redux'
-import { WhiteBox, Button, StarRating } from '../StyledComponents'
+import { WhiteBoxFlip, StarRating } from '../StyledComponents'
 
-const Product = ({ title, price, image, rating, id }) => {
+const Product = ({ title, price, image, rating, detail, id }) => {
   const dispatch = useDispatch()
+  const [rotate, setRotate] = useState(0)
 
   const addToBasket = () => {
     dispatch({
@@ -14,21 +15,39 @@ const Product = ({ title, price, image, rating, id }) => {
   }
 
   return (
-    <WhiteBox style={{ width: '350px', height: '370px', margin: '0 15px' }}>
-      <div className='product'>
-        <div className='product-description'>
+    <div className='product-container'>
+      <WhiteBoxFlip
+        style={{
+          width: '100%',
+          height: '100%',
+          boxSizing: 'border-box',
+          cursor: 'pointer',
+        }}
+        rotate={rotate}
+        onClick={() => setRotate(rotate === 0 ? '180deg' : 0)}
+      >
+        <div className='product-position-helper product-content-front'>
+          <div className='product-description'>
+            <strong>{title}</strong>
+            <p className='product-price'>${price}</p>
+            <StarRating rating={rating} />
+          </div>
+
+          <div className='product-image'>
+            <img src={image} alt='product' />
+          </div>
+        </div>
+
+        <div className='product-position-helper product-content-back'>
           <strong>{title}</strong>
-          <div className='product-price'>${price}</div>
-          <StarRating rating={rating} />
-        </div>
+          <p className='product-detail'>{detail}</p>
 
-        <div className='product-image'>
-          <img src={image} alt='product' />
+          <div className='product-button-container'>
+            <button onClick={addToBasket}>Add to Basket</button>
+          </div>
         </div>
-
-        <Button onClick={addToBasket}>Add to Basket</Button>
-      </div>
-    </WhiteBox>
+      </WhiteBoxFlip>
+    </div>
   )
 }
 

@@ -8,7 +8,7 @@ import { db } from '../../firebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
 import CurrencyFormat from 'react-currency-format'
 import { decryptTotal } from '../../crypto'
-import { WhiteBox, Button, StyledAlert } from '../StyledComponents'
+import { WhiteBox, button, StyledAlert } from '../StyledComponents'
 import Address from './Address'
 
 const Payment = () => {
@@ -111,12 +111,12 @@ const Payment = () => {
             </StyledAlert>
           )}
 
-          <Button
+          <button
             disabled={processing || disabled}
             className='payment-buy-button'
           >
             <span>{processing ? 'Processing' : 'Buy now!'}</span>
-          </Button>
+          </button>
         </form>
       </WhiteBox>
     </div>

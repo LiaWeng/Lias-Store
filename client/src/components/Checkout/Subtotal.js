@@ -4,7 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { encryptTotal } from '../../crypto'
-import { Button, StyledAlert } from '../StyledComponents'
+import { StyledAlert } from '../StyledComponents'
 
 const calculateTotal = async (basket, products) => {
   let subtotal = 0
@@ -66,14 +66,14 @@ const Subtotal = () => {
         </StyledAlert>
       )}
 
-      <Button
+      <button
         onClick={() => {
           navigate(`/payment/${totalData?.encryptedTotal}`)
         }}
         disabled={Object.keys(basket).length === 0 || !user}
       >
         Go to Checkout
-      </Button>
+      </button>
     </div>
   )
 }
