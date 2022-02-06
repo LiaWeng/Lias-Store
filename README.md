@@ -1,6 +1,6 @@
 # Lia's Store :shopping_cart:
 
-Lia's Store is my take on an online e-commerce website.
+Lia's Store a full stack e-commerce website built with React and Firebase.
 
 The application is complete with the following functionalities:
 
@@ -22,6 +22,7 @@ The application is complete with the following functionalities:
   - MM/YY: 04 / 24
   - CVC: 242
   - ZIP: 42424
+- Start shopping!
 
 ## At a Glance
 
